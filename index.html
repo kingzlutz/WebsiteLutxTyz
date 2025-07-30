@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUTXTYZ CRASH</title>
+    <style>
+        :root {
+            --primary: #0f0;
+            --secondary: #00f7ff;
+            --bg: #000;
+            --text: #fff;
+            --accent: #ff00aa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 247, 255, 0.05) 0%, transparent 20%);
+        }
+        
+        .cyber-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .cyber-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .cyber-title {
+            font-size: 3rem;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            animation: flicker 2s infinite alternate;
+        }
+        
+        .cyber-subtitle {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cyber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .cyber-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            border-color: var(--accent);
+        }
+        
+        .cyber-card-title {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            text-shadow: 0 0 5px var(--secondary);
+        }
+        
+        .cyber-card-desc {
+            margin-bottom: 20px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .cyber-btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+        
+        .cyber-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary);
+        }
+        
+        .cyber-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .cyber-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid var(--secondary);
+            color: var(--secondary);
+            font-size: 0.8rem;
+        }
+        
+        .cyber-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+            color: var(--text);
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+        
+        .cyber-label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        .login-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(
+                    rgba(0, 0, 0, 0.1) 50%, 
+                    rgba(0, 0, 0, 0.3) 50%
+                );
+            background-size: 100% 2px;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.5;
+        }
+        
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            color: #0ff;
+            z-index: -1;
+            animation: glitch-effect 3s infinite;
+        }
+        
+        .glitch::after {
+            color: #f0f;
+            z-index: -2;
+            animation: glitch-effect 2s infinite reverse;
+        }
+        
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 
+                    0 0 5px var(--primary),
+                    0 0 10px var(--primary),
+                    0 0 20px var(--primary),
+                    0 0 40px var(--accent),
+                    0 0 80px var(--accent);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+        
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--primary);
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            color: var(--primary);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: var(--secondary);
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .cyber-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .cyber-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: var(--text);
+            border: 1px solid transparent;
+            border-bottom: none;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-tab.active {
+            background: rgba(0, 255, 0, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Executing Attack...</div>
+    </div>
+    
+    <div class="login-container" id="loginContainer">
+        <h2 class="login-title glitch" data-text="ACCESS CONTROL">ACCESS CONTROL</h2>
+        <div>
+            <label class="cyber-label">IP Address:</label>
+            <input type="text" class="cyber-input" id="ipAddress" placeholder="Enter your IP">
+        </div>
+        <div>
+            <label class="cyber-label">Password:</label>
+            <input type="password" class="cyber-input" id="password" placeholder="Enter password">
+        </div>
+        <button class="cyber-btn" id="loginBtn">LOGIN</button>
+    </div>
+    
+    <div class="cyber-container" id="mainContent" style="display: none;">
+        <header class="cyber-header">
+            <h1 class="cyber-title glitch" data-text="LUTXTYZ CRASH">LUTXTYZ CRASH</h1>
+            <p class="cyber-subtitle">Advanced WhatsApp Crash System</p>
+        </header>
+        
+        <div class="cyber-tabs">
+            <div class="cyber-tab active" data-tab="ios">iOS Attacks</div>
+            <div class="cyber-tab" data-tab="android">Android Attacks</div>
+            <div class="cyber-tab" data-tab="ui">UI Attacks</div>
+            <div class="cyber-tab" data-tab="special">Special Attacks</div>
+        </div>
+        
+        <div class="tab-content active" id="ios">
+            <div class="cyber-grid">
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampSuperIos</h3>
+                    <p class="cyber-card-desc">Super crash attack for iOS devices with extended text message.</p>
+                    <input type="text" class="cyber-input" id="target-superios" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampSuperIos')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampIosChat</h3>
+                    <p class="cyber-card-desc">iOS chat crash with null bytes and large text payload.</p>
+                    <input type="text" class="cyber-input" id="target-ioschat" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampIosChat')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">XiosVirus</h3>
+                    <p class="cyber-card-desc">iOS virus attack with repeated special characters.</p>
+                    <input type="text" class="cyber-input" id="target-xios" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('XiosVirus')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampireBlankIphone</h3>
+                    <p class="cyber-card-desc">Blank screen attack for iPhone devices.</p>
+                    <input type="text" class="cyber-input" id="target-blankiphone" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampireBlankIphone')">EXECUTE</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="android">
+            <div class="cyber-grid">
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampireSticker</h3>
+                    <p class="cyber-card-desc">Sticker pack attack with large name and publisher fields.</p>
+                    <input type="text" class="cyber-input" id="target-sticker" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampireSticker')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampireNewSticker</h3>
+                    <p class="cyber-card-desc">New sticker pack attack with repeated characters.</p>
+                    <input type="text" class="cyber-input" id="target-newsticker" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampireNewSticker')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampireCrashUi</h3>
+                    <p class="cyber-card-desc">UI crash attack for Android devices.</p>
+                    <input type="text" class="cyber-input" id="target-crashui" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampireCrashUi')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampDoct</h3>
+                    <p class="cyber-card-desc">Document message attack with large file size.</p>
+                    <input type="text" class="cyber-input" id="target-doct" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampDoct')">EXECUTE</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="ui">
+            <div class="cyber-grid">
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">BlankScreen</h3>
+                    <p class="cyber-card-desc">Blank screen attack with large text payload.</p>
+                    <input type="text" class="cyber-input" id="target-blankscreen" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('BlankScreen')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampFreeze</h3>
+                    <p class="cyber-card-desc">Freeze attack with group mentions.</p>
+                    <input type="text" class="cyber-input" id="target-freeze" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampFreeze')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampSpamNotif</h3>
+                    <p class="cyber-card-desc">Spam notification attack.</p>
+                    <input type="text" class="cyber-input" id="target-spamnotif" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampSpamNotif')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampBlankNotif</h3>
+                    <p class="cyber-card-desc">Blank notification attack.</p>
+                    <input type="text" class="cyber-input" id="target-blanknotif" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampBlankNotif')">EXECUTE</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="special">
+            <div class="cyber-grid">
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampBroadcast</h3>
+                    <p class="cyber-card-desc">Broadcast attack to multiple targets.</p>
+                    <input type="text" class="cyber-input" id="target-broadcast" placeholder="Target numbers (comma separated)">
+                    <button class="cyber-btn" onclick="attack('VampBroadcast')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampCrashCH</h3>
+                    <p class="cyber-card-desc">Channel crash attack.</p>
+                    <input type="text" class="cyber-input" id="target-crashch" placeholder="Target channel">
+                    <button class="cyber-btn" onclick="attack('VampCrashCH')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampFcSpam</h3>
+                    <p class="cyber-card-desc">Force close spam attack.</p>
+                    <input type="text" class="cyber-input" id="target-fcspam" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampFcSpam')">EXECUTE</button>
+                </div>
+                
+                <div class="cyber-card">
+                    <h3 class="cyber-card-title">VampFcCall</h3>
+                    <p class="cyber-card-desc">Force close call attack.</p>
+                    <input type="text" class="cyber-input" id="target-fccall" placeholder="Target number (e.g., 628xxxx)">
+                    <button class="cyber-btn" onclick="attack('VampFcCall')">EXECUTE</button>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="cyber-footer">
+            <p>LUTXTYZ CRASH SYSTEM v2.0 | Advanced WhatsApp Attack Tool</p>
+        </footer>
+    </div>
+    
+    <div class="watermark">EtsukoXyz</div>
+    
+    <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" preload="auto"></audio>
+    <audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" preload="auto"></audio>
+    <audio id="errorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-warning-alarm-688.mp3" preload="auto"></audio>
+    
+    <script>
+        // Login functionality
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const ipAddress = document.getElementById('ipAddress').value;
+            const password = document.getElementById('password').value;
+            
+            playSound('clickSound');
+            
+            // Simple validation - in a real app, you'd have proper authentication
+            if (ipAddress && password) {
+                showLoading();
+                
+                // Simulate authentication delay
+                setTimeout(() => {
+                    hideLoading();
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    playSound('successSound');
+                }, 2000);
+            } else {
+                playSound('errorSound');
+                alert('Please enter both IP Address and Password');
+            }
+        });
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.cyber-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                playSound('clickSound');
+                
+                // Remove active class from all tabs and content
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Sound functions
+        function playSound(soundId) {
+            const sound = document.getElementById(soundId);
+            sound.currentTime = 0;
+            sound.play();
+        }
+        
+        // Loading functions
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+        
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        // Attack function - this would be connected to your actual functions
+        function attack(attackType) {
+            playSound('clickSound');
+            showLoading();
+            
+            const targetId = `target-${attackType.toLowerCase()}`;
+            const target = document.getElementById(targetId).value;
+            
+            if (!target) {
+                hideLoading();
+                playSound('errorSound');
+                alert('Please enter a target');
+                return;
+            }
+            
+            // Simulate attack execution
+            setTimeout(() => {
+                hideLoading();
+                playSound('successSound');
+                
+                // In a real implementation, this would call your actual functions
+                console.log(`Executing ${attackType} on target: ${target}`);
+                
+                // Here you would call the appropriate function from your provided code
+                // For example:
+                // if (attackType === 'VampSuperIos') {
+                //     VampSuperIos(target);
+                // } else if (attackType === 'VampIosChat') {
+                //     VampIosChat(target);
+                // }
+                // And so on for all attack types...
+                
+                alert(`${attackType} executed successfully on ${target}`);
+            }, 3000);
+        }
+        
+        // All your provided functions would be implemented here
+        // For example:
+        /*
+        async function VampSuperIos(target) {
+            // Implementation from your provided code
+        }
+        
+        async function VampIosChat(target) {
+            // Implementation from your provided code
+        }
+        
+        // And all other functions...
+        */
+        
+        // For demonstration, I'll include a few key functions:
+        async function VampSuperIos(target) {
+            try {
+                // This would be the actual implementation from your code
+                console.log(`VampSuperIos attack sent to ${target}`);
+                return { success: true };
+            } catch (err) {
+                console.error(err);
+                return { success: false, error: err.message };
+            }
+        }
+        
+        async function VampIosChat(target) {
+            try {
+                // This would be the actual implementation from your code
+                console.log(`VampIosChat attack sent to ${target}`);
+                return { success: true };
+            } catch (err) {
+                console.error(err);
+                return { success: false, error: err.message };
+            }
+        }
+        
+        async function XiosVirus(target) {
+            try {
+                // This would be the actual implementation from your code
+                console.log(`XiosVirus attack sent to ${target}`);
+                return { success: true };
+            } catch (err) {
+                console.error(err);
+                return { success: false, error: err.message };
+            }
+        }
+        
+        // And so on for all other functions...
+    </script>
+</body>
+</html>
